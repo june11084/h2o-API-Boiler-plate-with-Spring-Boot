@@ -13,7 +13,27 @@ import java.io.IOException;
 public class Score {
 
     public double getScore() throws PredictException, IOException {
-        EasyPredictModelWrapper model = new EasyPredictModelWrapper(MojoModel.load("C:\\Users\\june1\\Desktop\\demo\\src\\main\\java\\com\\example\\demo\\model\\GBM_model_R_1560275251624_1.zip"));
+        EasyPredictModelWrapper model = new EasyPredictModelWrapper(MojoModel.load("src/main/java/com/example/demo/model"));
+
+//        File file = new File("src/main/java/com/example/demo/model");
+//        for(String filename : file.list()){
+//            System.out.println((filename));
+//        }
+//
+//        try {
+//            ZipFile zipFile = new ZipFile("src/main/java/com/example/demo/model/GBM_model_R_1560275251624_1.zip");
+//            Enumeration<?> enu = zipFile.entries();
+//            while (enu.hasMoreElements()) {
+//                ZipEntry zipEntry = (ZipEntry) enu.nextElement();
+//                String name = zipEntry.getName();
+//                long size = zipEntry.getSize();
+//                long compressedSize = zipEntry.getCompressedSize();
+//                System.out.printf("name: %-20s | size: %6d | compressed size: %6d\n",
+//                        name, size, compressedSize);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         RowData row = new RowData();
         row.put("AGE", "68");
