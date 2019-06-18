@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Score {
 
     public double getScore() throws PredictException, IOException {
-        EasyPredictModelWrapper model = new EasyPredictModelWrapper(MojoModel.load("src/main/java/com/example/demo/model"));
+        EasyPredictModelWrapper model = new EasyPredictModelWrapper(MojoModel.load("src/main/java/com/example/demo/model/GBM_model_R_1560275251624_1.zip"));
 
 //        File file = new File("src/main/java/com/example/demo/model");
 //        for(String filename : file.list()){
