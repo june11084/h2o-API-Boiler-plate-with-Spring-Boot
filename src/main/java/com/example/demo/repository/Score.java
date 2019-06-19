@@ -17,32 +17,11 @@ import java.io.InputStream;
 public class Score {
 
     public double getScore() throws PredictException, IOException {
-        //BufferedReader reader = new BufferedReader(new InputStreamReader(Score.class.getResourceAsStream("GBM_model_R_1560275251624_1.zip")));
 
         InputStream mojoIS = getClass().getClassLoader().getResourceAsStream("GBM_model_R_1560275251624_1.zip");
         MojoReaderBackend reader = MojoReaderBackendFactory.createReaderBackend(mojoIS, MojoReaderBackendFactory.CachingStrategy.MEMORY);
         MojoModel mojoModel = ModelMojoReader.readFrom(reader);
         EasyPredictModelWrapper model = new EasyPredictModelWrapper(mojoModel);
-
-//        File file = new File("src/main/java/com/example/demo/model");
-//        for(String filename : file.list()){
-//            System.out.println((filename));
-//        }
-//
-//        try {
-//            ZipFile zipFile = new ZipFile("src/main/java/com/example/demo/model/GBM_model_R_1560275251624_1.zip");
-//            Enumeration<?> enu = zipFile.entries();
-//            while (enu.hasMoreElements()) {
-//                ZipEntry zipEntry = (ZipEntry) enu.nextElement();
-//                String name = zipEntry.getName();
-//                long size = zipEntry.getSize();
-//                long compressedSize = zipEntry.getCompressedSize();
-//                System.out.printf("name: %-20s | size: %6d | compressed size: %6d\n",
-//                        name, size, compressedSize);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
         RowData row = new RowData();
         row.put("AGE", "68");
