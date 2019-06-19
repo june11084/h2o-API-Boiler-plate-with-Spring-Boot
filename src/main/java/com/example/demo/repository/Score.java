@@ -1,6 +1,9 @@
 package com.example.demo.repository;
 
+import hex.genmodel.ModelMojoReader;
 import hex.genmodel.MojoModel;
+import hex.genmodel.MojoReaderBackend;
+import hex.genmodel.MojoReaderBackendFactory;
 import hex.genmodel.easy.EasyPredictModelWrapper;
 import hex.genmodel.easy.RowData;
 import hex.genmodel.easy.exception.PredictException;
@@ -8,12 +11,18 @@ import hex.genmodel.easy.prediction.BinomialModelPrediction;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 @Repository
 public class Score {
 
     public double getScore() throws PredictException, IOException {
-        EasyPredictModelWrapper model = new EasyPredictModelWrapper(MojoModel.load("./src/main/java/com/example/demo/model/GBM_model_R_1560275251624_1.zip"));
+        //BufferedReader reader = new BufferedReader(new InputStreamReader(Score.class.getResourceAsStream("GBM_model_R_1560275251624_1.zip")));
+
+        InputStream mojoIS = getClass().getClassLoader().getResourceAsStream("GBM_model_R_1560275251624_1.zip");
+        MojoReaderBackend reader = MojoReaderBackendFactory.createReaderBackend(mojoIS, MojoReaderBackendFactory.CachingStrategy.MEMORY);
+        MojoModel mojoModel = ModelMojoReader.readFrom(reader);
+        EasyPredictModelWrapper model = new EasyPredictModelWrapper(mojoModel);
 
 //        File file = new File("src/main/java/com/example/demo/model");
 //        for(String filename : file.list()){
@@ -40,7 +49,6 @@ public class Score {
         row.put("RACE", "2");
         row.put("DCAPS", "2");
         row.put("VOL", "0");
-        row.put("GLEASON", "6");
 
         BinomialModelPrediction p = model.predictBinomial(row);
         System.out.println("Has penetrated the prostatic capsule (1=yes; 0=no): " + p.label);
