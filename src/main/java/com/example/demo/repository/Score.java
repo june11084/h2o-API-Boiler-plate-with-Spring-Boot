@@ -19,6 +19,7 @@ public class Score {
     public double getScore() throws PredictException, IOException {
 
         InputStream mojoIS = getClass().getClassLoader().getResourceAsStream("GBM_model_R_1560275251624_1.zip");
+        System.out.println("model is" + mojoIS);
         MojoReaderBackend reader = MojoReaderBackendFactory.createReaderBackend(mojoIS, MojoReaderBackendFactory.CachingStrategy.MEMORY);
         MojoModel mojoModel = ModelMojoReader.readFrom(reader);
         EasyPredictModelWrapper model = new EasyPredictModelWrapper(mojoModel);
