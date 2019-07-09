@@ -12,3 +12,4 @@ ADD demo.jar demo.jar
 
 # Run the jar file
 CMD java -jar demo.jar
+
